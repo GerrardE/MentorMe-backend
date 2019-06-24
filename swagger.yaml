@@ -1,0 +1,16 @@
+swagger: "2.0"
+info:
+  description: "MentorMe lets you lend your business skills to an entrepreneurs across the globe."
+  version: "1.0.0"
+  title: "mento"
+  license:
+    name: "MIT"
+    url: "https://www.apache.org/licenses/LICENSE-2.0.html"
+basePath: "/api/v1"
+tags:
+- name: "users"
+  description: "User operations"
+schemes:
+  - "https"
+  - "http"
+paths:
