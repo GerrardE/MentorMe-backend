@@ -4,12 +4,19 @@ node_js:
 cache:
   directories:
   - node_modules
+env:
+  global:
+    - CC_TEST_REPORTER_ID=834b6ba6287c340ba0c36c8254ef906212c044574617db1f3ca696d3ae793243
+
 before_install:
 - npm install
 before_script:
+  - psql -c 'CREATE DATABASE travis;' -U postgres
+  - psql -c "CREATE USER foo WITH PASSWORD 'bar';" -U postgres
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
+  - npm run build
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
