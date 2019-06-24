@@ -6,8 +6,7 @@ cache:
   - node_modules
 global:
  - export NODE_ENV=test
-addons:
-    postgresql: "9.6"
+
 env:
   global:
     - CC_TEST_REPORTER_ID=834b6ba6287c340ba0c36c8254ef906212c044574617db1f3ca696d3ae793243
