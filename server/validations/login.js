@@ -10,7 +10,7 @@ const validLogin = (data) => {
   if (!validator.isEmail(data.email)) {
     errors.email = 'Email is invalid';
   }
-  
+
   if (validator.isEmpty(data.email)) {
     errors.email = 'Email field is required';
   }
