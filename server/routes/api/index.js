@@ -11,6 +11,9 @@ router.get('/', (request, response) => response.status(200).send('Welcome to the
 
 router.post('/auth/signup', trim, UserController.register);
 router.post('/auth/login', trim, UserController.login);
+router.post('/questions', verifyToken, trim, QuestionController.create);
 router.put('/questions/:id', verifyToken, trim, QuestionFinder, QuestionController.update);
+router.delete('/questions/:id', verifyToken, trim, QuestionFinder, QuestionController.delete);
+router.get('/questions/:tag', verifyToken, QuestionController.get);
 
 export default router;
