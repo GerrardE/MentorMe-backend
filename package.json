@@ -1,7 +1,7 @@
 {
   "name": "mentorme-backend",
   "version": "1.0.0",
-  "description": "MentorMe lets you lend your business skills to an entrepreneurs across the globe",
+  "description": "MentorMe lets you lend your business skills to entrepreneurs across the globe",
   "main": "app.js",
   "scripts": {
     "start": "node ./dist/app.js",
