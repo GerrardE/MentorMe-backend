@@ -3,8 +3,7 @@ import isEmpty from '../middlewares/isEmpty';
 
 const validRegistration = (data) => {
   const errors = {};
-  data.firstName = !isEmpty(data.firstName) ? data.firstName : '';
-  data.lastName = !isEmpty(data.lastName) ? data.lastName : '';
+  data.fullName = !isEmpty(data.fullName) ? data.fullName : '';
   data.type = !isEmpty(data.type) ? data.type : '';
   data.email = !isEmpty(data.email) ? data.email : '';
   data.country = !isEmpty(data.country) ? data.country : '';
@@ -12,20 +11,12 @@ const validRegistration = (data) => {
   data.password2 = !isEmpty(data.password2) ? data.password2 : '';
 
   // Name validations
-  if (!validator.isLength(data.firstName, { min: 2, max: 100 })) {
-    errors.firstName = 'firstName must be between 2 and 100 characters';
+  if (!validator.isLength(data.fullName, { min: 2, max: 200 })) {
+    errors.fullName = 'fullName must be between 2 and 100 characters';
   }
 
-  if (!validator.isLength(data.lastName, { min: 2, max: 100 })) {
-    errors.lastName = 'lastName must be between 2 and 100 characters';
-  }
-
-  if (validator.isEmpty(data.firstName)) {
-    errors.firstName = 'firstName field is required';
-  }
-
-  if (validator.isEmpty(data.lastName)) {
-    errors.lastName = 'lastName field is required';
+  if (validator.isEmpty(data.fullName)) {
+    errors.fullName = 'fullName field is required';
   }
 
   // Type validation

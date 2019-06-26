@@ -6,11 +6,7 @@ module.exports = {
       defaultValue: Sequelize.UUIDV4,
       allowNull: false
     },
-    firstName: {
-      type: Sequelize.CITEXT,
-      allowNull: false
-    },
-    lastName: {
+    fullName: {
       type: Sequelize.CITEXT,
       allowNull: false
     },

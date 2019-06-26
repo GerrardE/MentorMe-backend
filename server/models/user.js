@@ -15,11 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: DataTypes.UUIDV4,
       allowNull: false
     },
-    firstName: {
-      type: DataTypes.CITEXT,
-      allowNull: false
-    },
-    lastName: {
+    fullName: {
       type: DataTypes.CITEXT,
       allowNull: false
     },

@@ -11,8 +11,7 @@ describe('TESTS TO SIGNUP ', () => {
       chai.request(app)
         .post('/api/v1/auth/signup')
         .send({
-          firstName: 'Tes',
-          lastName: 'Test',
+          fullName: 'Test Name',
           type: 'Volunteer',
           email: 'test@gmail.com',
           country: 'Ukraine',
