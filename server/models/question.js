@@ -14,33 +14,32 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    tag: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     description: {
       type: DataTypes.STRING,
       allowNull: false
     },
     photo: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
   }, {});
   Question.associate = (models) => {
     const {
-      Reply, User, Tag
+      Reply, User
     } = models;
 
     Question.belongsTo(User, {
       foreignKey: 'userId',
-      as: 'user_question',
+      as: 'question',
     });
 
     Question.hasMany(Reply, {
       foreignKey: 'questionId',
       as: 'reply',
-    });
-
-    Question.hasMany(Tag, {
-      foreignKey: 'questionId',
-      as: 'tag',
     });
   };
   return Question;

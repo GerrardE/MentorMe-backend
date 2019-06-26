@@ -18,13 +18,17 @@ module.exports = {
       type: Sequelize.STRING,
       allowNull: false
     },
-    question: {
+    tag: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    description: {
       type: Sequelize.STRING,
       allowNull: false
     },
     photo: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     createdAt: {
       allowNull: false,

@@ -9,7 +9,7 @@ global:
 
 env:
   global:
-    - CC_TEST_REPORTER_ID=834b6ba6287c340ba0c36c8254ef906212c044574617db1f3ca696d3ae793243
+    - CC_TEST_REPORTER_ID=75240f524424b47cec9bc7fc047c59ef885a0790c4c3e5a9856edebbae5ef656
 
 before_install:
 - npm install
