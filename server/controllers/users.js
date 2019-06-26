@@ -1,4 +1,3 @@
-import bcrypt from 'bcrypt';
 import models from '../models';
 import userExtractor from '../helpers/userExtractor';
 import { createToken } from '../middlewares/Token';
@@ -21,7 +20,7 @@ class UserController {
    * @return {json} Returns json object
    * @memberof UserController
    */
-  static async register(req, res, next) {
+  static async register(req, res) {
     try {
       const { errors, isValid } = validRegistration(req.body);
       // Check Validation
