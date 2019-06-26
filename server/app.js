@@ -4,7 +4,7 @@ import logger from 'morgan';
 import { config } from 'dotenv';
 import bodyParser from 'body-parser';
 import swaggerUi from 'swagger-ui-express';
-import apis from '@routes/api';
+import apis from './routes/api';
 import swaggerSpec from './config/swagger';
 
 const debugged = debug('app');
