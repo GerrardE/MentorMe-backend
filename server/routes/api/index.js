@@ -7,5 +7,6 @@ const router = express.Router();
 router.get('/', (request, response) => response.status(200).send('Welcome to the MentorMe API'));
 
 router.post('/auth/signup', trim, UserController.register);
+router.post('/auth/login', trim, UserController.login);
 
 export default router;

@@ -1,7 +1,9 @@
+import bcrypt from 'bcrypt';
 import models from '../models';
 import userExtractor from '../helpers/userExtractor';
 import { createToken } from '../middlewares/Token';
 import validRegistration from '../validations/register';
+import validLogin from '../validations/login';
 import validationResponse from '../validations/validationResponse';
 
 const { User } = models;
@@ -13,6 +15,7 @@ const { User } = models;
  */
 class UserController {
   /**
+   * User registration
    * @static
    * @param {*} req - Request object
    * @param {*} res - Response object
@@ -35,7 +38,10 @@ class UserController {
 
       const payload = {
         id: user.id,
-        email: user.email
+        fullName: user.fullName,
+        type: user.type,
+        country: user.country,
+        email: user.email,
       };
 
       const token = await createToken(payload);
@@ -55,6 +61,67 @@ class UserController {
       return res.status(400).json({
         status: 400,
         errors: 'Registration unsuccessful'
+      });
+    }
+  }
+
+  /**
+   * User login
+    * @static
+   * @param {*} req - Request object
+   * @param {*} res - Response object
+   * @param {*} next - The next middleware
+   * @return {json} Returns json object
+   * @memberof UserController
+   */
+  static async login(req, res) {
+    try {
+      const { errors, isValid } = await validLogin(req.body);
+      // Check Validation
+      if (!isValid) {
+        return res.status(400).json({
+          status: 400,
+          errors
+        });
+      }
+
+      const { email, password } = req.body;
+      const user = await User.findOne({
+        where: {
+          email
+        }
+      });
+
+      if (!user) {
+        return res.status(400).json({
+          status: 400,
+          message: 'Invalid email or password'
+        });
+      }
+
+      const match = await bcrypt.compare(password, user.password);
+      if (!match) {
+        return res.status(400).json({
+          status: 400,
+          message: 'Invalid email or password'
+        });
+      }
+
+      const payload = {
+        id: user.id,
+        fullName: user.fullName,
+        type: user.type,
+        country: user.country,
+        email: user.email,
+      };
+      const token = await createToken(payload);
+      res.status(200).json({
+        status: 200, message: 'Login successful', user: userExtractor(user, token)
+      });
+    } catch (err) {
+      return res.status(400).json({
+        status: 400,
+        errors: 'Login unsuccessful'
       });
     }
   }
