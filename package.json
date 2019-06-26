@@ -48,16 +48,17 @@
     "debug": "^4.1.1",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
-    "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1",
     "pg": "^7.11.0",
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.8.12",
     "sequelize-cli": "^5.5.0",
+    "sinon": "^7.3.2",
     "sqlite3": "^4.0.9",
     "swagger-jsdoc": "^3.2.9",
-    "swagger-ui-express": "^4.0.6"
+    "swagger-ui-express": "^4.0.6",
+    "validator": "^11.0.0"
   },
   "devDependencies": {
     "@babel/polyfill": "^7.4.4",
@@ -70,19 +71,20 @@
     "nodemon": "^1.19.1",
     "nyc": "^14.1.1"
   },
+  "engines": {
+    "node": "10.3.0",
+    "npm": "6.9.0"
+  },
   "nyc": {
     "all": true,
     "include": [
       "server/**"
     ],
-    "engines": {
-      "node": "10.3.0",
-      "npm": "6.9.0"
-    },
     "exclude": [
       "**/tests/**",
       "server/migrations",
-      "server/config"
+      "server/config",
+      "server/validations"
     ]
   }
 }

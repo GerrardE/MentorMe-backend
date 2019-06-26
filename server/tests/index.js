@@ -1,1 +1,2 @@
-import './base.tests';
+import './base.test';
+import './trim.test';

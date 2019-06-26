@@ -21,7 +21,7 @@ const swaggerDefinition = {
 // Options for the swagger docs
 const options = {
   swaggerDefinition,
-  apis: ['/swagger.yaml']
+  apis: ['./swagger.yaml']
 };
 
 // Initialize swagger-jsdoc

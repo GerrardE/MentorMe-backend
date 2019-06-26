@@ -1,7 +1,11 @@
 import express from 'express';
+import UserController from '../../controllers/users';
+import trim from '../../middlewares/trim';
 
-const apiRouter = express.Router();
+const router = express.Router();
 
-apiRouter.get('/', (request, response) => response.status(200).send('Welcome to the MentorMe API'));
+router.get('/', (request, response) => response.status(200).send('Welcome to the MentorMe API'));
 
-export default apiRouter;
+router.post('/auth/signup', trim, UserController.register);
+
+export default router;
