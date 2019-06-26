@@ -5,10 +5,10 @@
 
 const userExtractor = (user, token) => {
   const {
-    email, id, firstname, lastname
+    email, id, fullName
   } = user;
   return {
-    id, firstname, lastname, email, token,
+    id, fullName, email, token,
   };
 };
 
