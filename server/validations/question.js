@@ -27,6 +27,10 @@ const validQuestion = (data) => {
   }
 
   // Description validations
+  if (!validator.isLength(data.description, { min: 10 })) {
+    errors.description = 'Description must be at least 10 characters';
+  }
+
   if (validator.isEmpty(data.description)) {
     errors.description = 'Description field is required';
   }

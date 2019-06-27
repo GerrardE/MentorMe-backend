@@ -6,16 +6,7 @@ module.exports = {
       primaryKey: true,
       type: Sequelize.INTEGER
     },
-    questionId: {
-      type: Sequelize.UUID,
-      allowNull: false,
-      references: {
-        model: 'Questions',
-        key: 'id',
-      },
-      onDelete: 'CASCADE',
-    },
-    tag: {
+    name: {
       type: Sequelize.STRING,
       allowNull: false
     },

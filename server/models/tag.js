@@ -4,9 +4,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       allowNull: false
     },
-    tag: {
+    name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true
     }
   }, {});
   Tag.associate = (models) => {
@@ -14,8 +15,9 @@ module.exports = (sequelize, DataTypes) => {
       Question
     } = models;
 
-    Tag.belongsTo(Question, {
+    Tag.belongsToMany(Question, {
       foreignKey: 'questionId',
+      through: 'questionTag',
       as: 'tags'
     });
   };
