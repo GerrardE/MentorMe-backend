@@ -22,7 +22,7 @@ describe('TESTS TO SIGNUP ', () => {
           expect(res.status).to.equal(201);
           expect(res.body.user).to.be.an('object');
           expect(res.body.user.token).to.be.a('string');
-          expect(res.body).to.have.property('status');
+          expect(res.body).to.have.property('user');
           expect(res.body.message).to.eql('Registration successful');
           done();
         });
@@ -45,7 +45,7 @@ describe('TESTS TO LOGIN ', () => {
           expect(res.status).to.equal(200);
           expect(res.body.user).to.be.an('object');
           expect(res.body.user.token).to.be.a('string');
-          expect(res.body).to.have.property('status');
+          expect(res.body).to.have.property('user');
           expect(res.body.message).to.eql('Login successful');
           done();
         });
@@ -65,7 +65,7 @@ describe('TESTS TO LOGIN ', () => {
           expect(res.status).to.equal(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('status');
-          expect(res.body.message).to.eql('Invalid email or password');
+          expect(res.body.errors).to.eql('Invalid email or password');
           done();
         });
     } catch (err) {
@@ -84,7 +84,7 @@ describe('TESTS TO LOGIN ', () => {
           expect(res.status).to.equal(400);
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.property('status');
-          expect(res.body.message).to.eql('Invalid email or password');
+          expect(res.body.errors).to.eql('Invalid email or password');
           done();
         });
     } catch (err) {

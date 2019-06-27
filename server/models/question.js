@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Question.associate = (models) => {
     const {
-      Reply, User
+      Reply, User, Tag
     } = models;
 
     Question.belongsTo(User, {
@@ -40,6 +40,11 @@ module.exports = (sequelize, DataTypes) => {
     Question.hasMany(Reply, {
       foreignKey: 'questionId',
       as: 'reply',
+    });
+
+    Question.hasMany(Tag, {
+      foreignKey: 'questionId',
+      as: 'categories',
     });
   };
   return Question;

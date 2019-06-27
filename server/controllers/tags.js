@@ -1,26 +1,26 @@
 import models from '../models';
-import validQuestion from '../validations/question';
+import validTag from '../validations/tag';
 
-const { Question } = models;
+const { Tag } = models;
 
 /**
- * Question Controller
+ * Tag Controller
  * @async
- * @class QuestionController
+ * @class TagController
  */
-class QuestionController {
+class TagController {
   /**
-   * Create a question
+   * Create a Tag
    * @static
    * @param {*} req - Request object
    * @param {*} res - Response object
    * @param {*} next - The next middleware
    * @return {json} Returns json object
-   * @memberof QuestionController
+   * @memberof TagController
    */
   static async create(req, res) {
     try {
-      const { errors, isValid } = validQuestion(req.body);
+      const { errors, isValid } = validTag(req.body);
       // Check Validation
       if (!isValid) {
         return res.status(400).json({
@@ -33,91 +33,65 @@ class QuestionController {
         title, tag, description, photo
       } = req.body;
 
-      const questionDetails = {
+      const TagDetails = {
         userId, title, tag, description, photo
       };
 
-      const payload = await Question.create(questionDetails);
+      const payload = await Tag.create(TagDetails);
 
       res.status(201).json({
         status: 201,
-        message: 'Question posted successfully',
+        message: 'Tag posted successfully',
         payload
       });
     } catch (err) {
       return res.status(400).json({
         status: 400,
-        errors: 'Question could not be created',
+        errors: 'Tag could not be created',
       });
     }
   }
 
   /**
-   * Get all questions by tag
+   * Get all Tags
    * @static
    * @param {*} req - Request object
    * @param {*} res - Response object
    * @param {*} next - The next middleware
    * @return {json} Returns json object
-   * @memberof QuestionController
+   * @memberof TagController
    */
   static async get(req, res) {
     try {
       const { tag } = req.params;
 
-      const payload = await Question.findAndCountAll({ where: { tag } });
+      const payload = await Tag.findAndCountAll({ where: { tag } });
 
       return res.status(200).json({
         status: 200,
-        message: 'Questions retrieved successfully',
+        message: 'Tags retrieved successfully',
         payload
       });
     } catch (err) {
       return res.status(400).json({
         status: 400,
-        errors: 'Questions could not be retrieved'
+        errors: 'Tags could not be retrieved'
       });
     }
   }
 
   /**
-   * Get all questions
+   * Update a Tag
    * @static
    * @param {*} req - Request object
    * @param {*} res - Response object
    * @param {*} next - The next middleware
    * @return {json} Returns json object
-   * @memberof QuestionController
-   */
-  static async getAll(req, res) {
-    try {
-      const payload = await Question.findAndCountAll();
-
-      return res.status(200).json({
-        status: 200,
-        message: 'Questions retrieved successfully',
-        payload
-      });
-    } catch (err) {
-      return res.status(400).json({
-        status: 400,
-        errors: 'Questions could not be retrieved'
-      });
-    }
-  }
-
-  /**
-   * Update a question
-   * @static
-   * @param {*} req - Request object
-   * @param {*} res - Response object
-   * @param {*} next - The next middleware
-   * @return {json} Returns json object
-   * @memberof QuestionController
+   * @memberof TagController
    */
   static async update(req, res) {
     try {
-      const { errors, isValid } = validQuestion(req.body);
+      const { errors, isValid } = validTag(req.body);
       // Check Validation
       if (!isValid) {
         return res.status(400).json({
@@ -126,59 +100,59 @@ class QuestionController {
         });
       }
 
-      const { question } = req;
-      const { userId, id } = question;
+      const { oldTag } = req;
+      const { userId, id } = oldTag;
 
       const {
         title, tag, description
       } = req.body;
 
-      const questionDetails = {
+      const TagDetails = {
         title, tag, description
       };
 
-      await Question.update(
-        { questionDetails }, { returning: true, where: { id, userId } }
+      await Tag.update(
+        { TagDetails }, { returning: true, where: { id, userId } }
       );
 
       res.status(200).json({
         status: 200,
-        message: 'Question updated successfully'
+        message: 'Tag updated successfully'
       });
     } catch (err) {
       return res.status(400).json({
         status: 400,
-        errors: 'Question could not be updated'
+        errors: 'Tag could not be updated'
       });
     }
   }
 
   /**
-   * Delete a question
+   * Delete a Tag
    * @static
    * @param {*} req - Request object
    * @param {*} res - Response object
    * @param {*} next - The next middleware
    * @return {json} Returns json object
-   * @memberof QuestionController
+   * @memberof TagController
    */
   static async delete(req, res) {
     try {
-      const { question } = req;
-      const { id, userId } = question;
-      await Question.destroy({ where: { id, userId } });
+      const { oldTag } = req;
+      const { id, userId } = oldTag;
+      await Tag.destroy({ where: { id, userId } });
 
       res.status(200).json({
         status: 200,
-        message: 'Question deleted successfully'
+        message: 'Tag deleted successfully'
       });
     } catch (err) {
       return res.status(400).json({
         status: 400,
-        errors: 'Question could not be deleted'
+        errors: 'Tag could not be deleted'
       });
     }
   }
 }
 
-export default QuestionController;
+export default TagController;

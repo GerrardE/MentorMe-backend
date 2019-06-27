@@ -37,6 +37,21 @@ describe('CRUD TESTS FOR QUESTION CONTROLLER', () => {
       throw err.message;
     }
   });
+  it('should return success on GET all questions', (done) => {
+    try {
+      chai.request(app)
+        .get('/api/v1/questions')
+        .set('Authorization', userToken)
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.payload).to.be.an('object');
+          expect(res.body.message).to.eql('Questions retrieved successfully');
+          done();
+        });
+    } catch (err) {
+      throw err.message;
+    }
+  });
   it('should return success on GET questions by tag', (done) => {
     try {
       chai.request(app)
