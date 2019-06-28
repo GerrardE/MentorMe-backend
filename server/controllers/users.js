@@ -35,7 +35,7 @@ class UserController {
       }
 
       const user = await User.create(req.body);
-
+      
       const payload = {
         id: user.id,
         fullName: user.fullName,
@@ -43,7 +43,8 @@ class UserController {
         country: user.country,
         email: user.email,
       };
-
+      
+      await user.createProfile(req.body);
       const token = await createToken(payload);
       res.status(201).json({
         status: 201,
@@ -122,6 +123,33 @@ class UserController {
       return res.status(400).json({
         status: 400,
         errors: 'Login unsuccessful'
+      });
+    }
+  }
+
+  /**
+   * List all users
+    * @static
+   * @param {*} req - Request object
+   * @param {*} res - Response object
+   * @param {*} next - The next middleware
+   * @return {json} Returns json object
+   * @memberof UserController
+   */
+  static async getUsers(req, res) {
+    try {
+      const payload = await User.findAndCountAll({
+        attributes: ['id', 'fullName', 'type', 'email', 'country', 'createdAt'],
+        include: [{ model: models.Profile, as: 'profile', attributes: ['status', 'bio', 'phone', 'avatar'] }]
+      });
+
+      res.status(200).json({
+        status: 200, message: 'Users retrieved successfully', payload
+      });
+    } catch (err) {
+      return res.status(400).json({
+        status: 400,
+        errors: 'Users could not be retrieved'
       });
     }
   }
