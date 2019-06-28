@@ -81,11 +81,38 @@ class QuestionController {
   }
 
   /**
-   * Get all questions
+   * Get a question by id
    * @static
    * @param {*} req - Request object
    * @param {*} res - Response object
    * @param {*} next - The next middleware
+   * @return {json} Returns json object
+   * @memberof QuestionController
+   */
+  static async getOne(req, res) {
+    try {
+      const { id } = req.params;
+
+      const payload = await Question.findOne({ where: { id } });
+
+      return res.status(200).json({
+        status: 200,
+        message: 'Question retrieved successfully',
+        payload
+      });
+    } catch (err) {
+      return res.status(400).json({
+        status: 400,
+        errors: 'Question could not be retrieved'
+      });
+    }
+  }
+
+  /**
+   * Get all questions
+   * @static
+   * @param {*} req - Request object
+   * @param {*} res - Response object
    * @return {json} Returns json object
    * @memberof QuestionController
    */

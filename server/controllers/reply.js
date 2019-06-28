@@ -64,7 +64,11 @@ class ReplyController {
     try {
       const { id } = req.params;
 
-      const payload = await Reply.findAndCountAll({ where: { questionId: id } });
+      const payload = await Reply.findAndCountAll({
+        where: { questionId: id },
+        attributes: ['id', 'body', 'createdAt'],
+        include: [{ model: models.User, as: 'user_reply', attributes: ['id', 'fullName'] }]
+      });
 
       return res.status(200).json({
         status: 200,
