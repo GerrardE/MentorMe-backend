@@ -35,7 +35,7 @@ class UserController {
       }
 
       const user = await User.create(req.body);
-      
+
       const payload = {
         id: user.id,
         fullName: user.fullName,
@@ -43,7 +43,7 @@ class UserController {
         country: user.country,
         email: user.email,
       };
-      
+
       await user.createProfile(req.body);
       const token = await createToken(payload);
       res.status(201).json({

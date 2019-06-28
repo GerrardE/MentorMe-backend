@@ -84,7 +84,8 @@ class ProfileController {
     } catch (err) {
       return res.status(400).send({
         status: 400,
-        errors: 'Profile could not be updated'
+        errors: 'Profile could not be updated',
+        err
       });
     }
   }
